@@ -1,27 +1,134 @@
 const express = require('express')
-const mysql = require("mysql")
+const session = require('express-session')
+const flash = require("express-flash")
+const ejs = require("ejs")
 const app = express()
+const path  = require("path")
 const port = 3000
+app.use(session({
+  secret: "lalala",
+  resave: false,
+  saveUninitialized: false
+}))
+app.use(flash())
 app.use(express.urlencoded({ extended: true }));
+app.set("view engine","ejs")
+app.set('views', path.join(__dirname, 'views'));
 
 
-const logins = {
-  "testuser":"testpassword"
+const { MongoClient, ServerApiVersion } = require('mongodb');
+const uri = "mongodb+srv://dev:iamastro42@cluster0.jcmziu4.mongodb.net/?appName=Cluster0";
+
+// Create a MongoClient with a MongoClientOptions object to set the Stable API version
+const client = new MongoClient(uri, {
+  serverApi: {
+    version: ServerApiVersion.v1,
+    strict: true,
+    deprecationErrors: true,
+  }
+});
+async function run() {
+  try {
+    // Connect the client to the server	(optional starting in v4.7)
+    await client.connect();
+    // Send a ping to confirm a successful connection
+    await client.db("admin").command({ ping: 1 });
+    console.log("Pinged your deployment. You successfully connected to MongoDB!");
+  } finally {
+    // Ensures that the client will close when you finish/error
+    await client.close();
+  }
+}
+run().catch(console.dir);
+
+async function checkLogin(user,pass){
+  try {
+    await client.connect();
+    let logins = await client.db("CritterCafe").collection("Logins").find().toArray()
+    logins = logins[0].logins
+    
+    if(Object.keys(logins).includes(user)){
+      if(logins[user] == pass){return true}
+      else {return false}
+    } else {
+      return false
+    }
+
+    // await client.close();
+
+  } catch {
+    await client.close()
+  }
+}
+
+async function addLogin(user,pass){
+  try {
+    await client.connect();
+    
+    let logins = await client.db("CritterCafe").collection("Logins").createIndex({user:pass})
+
+  } catch {
+    await client.close()
+  }
 }
 
 
-
 app.get('/', (req, res) => {
-  res.sendFile(__dirname+"/html/index.html")
+  let info = req.flash("info")[0]
+  console.log(info)
+  res.render("index",{
+    "info":info,
+    "username":req.session.username,
+    "password":req.session.password
+  })
+})
+
+app.get('/login',(req,res) => {
+  res.sendFile(__dirname+"/html/login.html")
+})
+
+app.get('/signup',(req,res)=>{
+  res.sendFile(__dirname+"/html/signup.html")
 })
 
 app.get('/submit',(req,res)=>{
   res.sendFile(__dirname+"/html/submit.html")
 })
 
+app.get('/profile',(req,res)=>{
+  if(req.session.username){
+    res.render("profile",{
+      "username":req.session.username
+    })
+  } else {
+    req.flash("info","log in first")
+    res.redirect("/")
+  }
+})
+
 app.post('/api/submit',(req,res)=>{
   console.log(req.body)
   res.redirect("/")
+})
+
+
+app.post('/api/login',async (req,res)=>{
+  console.log("form response: ", req.body)
+  let result = await checkLogin(req.body.username,req.body.password)
+  console.log("login result: ", result)
+  if(result){
+    req.session.username = req.body.username;
+    req.session.password = req.body.password
+    res.redirect('/profile')
+  }else{
+    req.flash("info","incorrect login")
+    res.redirect('/')
+  }
+    
+})
+
+app.post('/api/signup', async (req,res)=>{
+  await addLogin(req.body.username,req.body.password)
 })
 
 app.use('/css',express.static("css"))

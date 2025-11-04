@@ -1,0 +1,25 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <link rel="stylesheet" href="css/style.css">
+        <title>Critter Cafe</title>
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    </head>
+    <body>
+        <h1>THIS IS THE HOMEPAGE OF CRITTERCAFE</h1>
+        <% if (info) { %>
+            <h2><%= info %></h2>
+        <% } %>
+
+        <% if (username) { %>
+            <h3>logged in:</h3>
+            <p><%= username %></p>
+            <p><%= password %></p>
+        <% } else { %>
+            <a href="/login">login</a>
+            <a href="/signup">sign up</a>
+        <% } %>
+
+
+        <script src="js/script.js"></script>
+    </body>
+</html>

@@ -17,7 +17,11 @@
   },
   "homepage": "https://github.com/M4RZTI4N/CritterCafe#readme",
   "dependencies": {
+    "ejs": "^3.1.10",
     "express": "^5.1.0",
+    "express-flash": "github:RGBboy/express-flash",
+    "express-session": "^1.18.2",
+    "mongodb": "^6.20.0",
     "mysql": "^2.18.1"
   }
 }
