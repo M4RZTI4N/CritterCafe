@@ -26,3 +26,4 @@ click_img.onclick = (e)=>{
 
     document.getElementById("rating_indicator").innerText = i   
 }
+

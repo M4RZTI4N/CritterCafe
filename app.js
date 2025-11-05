@@ -44,17 +44,17 @@ run().catch(console.dir);
 async function checkLogin(user,pass){
   try {
     await client.connect();
-    let logins = await client.db("CritterCafe").collection("Logins").find().toArray()
-    logins = logins[0].logins
-    
-    if(Object.keys(logins).includes(user)){
-      if(logins[user] == pass){return true}
+    let logins = await client.db("CritterCafe").collection("Logins").find({username: user}).toArray()
+   
+    console.log(logins)
+    if(logins.length > 0){
+      if(logins[0].password == pass){return true}
       else {return false}
     } else {
       return false
     }
 
-    // await client.close();
+    
 
   } catch {
     await client.close()
@@ -64,11 +64,20 @@ async function checkLogin(user,pass){
 async function addLogin(user,pass){
   try {
     await client.connect();
+
+
     
-    let logins = await client.db("CritterCafe").collection("Logins").createIndex({user:pass})
+    
+    let logins = await client.db("CritterCafe").collection("Logins").insertOne({
+      username:user,
+      password:pass
+    })
+
+    return true
 
   } catch {
     await client.close()
+    return false
   }
 }
 
@@ -128,7 +137,22 @@ app.post('/api/login',async (req,res)=>{
 })
 
 app.post('/api/signup', async (req,res)=>{
-  await addLogin(req.body.username,req.body.password)
+  let sucess = await addLogin(req.body.username,req.body.password)
+  if(sucess){
+    req.session.username = req.body.username;
+    req.session.password = req.body.password;
+    res.redirect('/profile')
+  } else {
+    req.flash("info","error with creating account")
+    res.redirect("/")
+  }
+  
+})
+
+app.get('/api/signout',async (req,res)=>{
+  req.session.destroy()
+
+  res.redirect("/")
 })
 
 app.use('/css',express.static("css"))
