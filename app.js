@@ -93,15 +93,19 @@ app.get('/', (req, res) => {
 })
 
 app.get('/login',(req,res) => {
-  res.sendFile(__dirname+"/html/login.html")
+  if(req.session.username){
+    res.redirect("/profile")
+  } else {
+    res.render("login")
+  }
 })
 
 app.get('/signup',(req,res)=>{
-  res.sendFile(__dirname+"/html/signup.html")
+  res.render("signup")
 })
 
 app.get('/submit',(req,res)=>{
-  res.sendFile(__dirname+"/html/submit.html")
+  res.render("submit")
 })
 
 app.get('/profile',(req,res)=>{
@@ -151,7 +155,7 @@ app.post('/api/signup', async (req,res)=>{
 
 app.get('/api/signout',async (req,res)=>{
   req.session.destroy()
-
+  req.flash("info","you have been signed out")
   res.redirect("/")
 })
 

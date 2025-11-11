@@ -1,0 +1,22 @@
+dialog {
+    position: fixed;
+    top: 5vh;
+    border: none;
+    padding: 3px;
+    background-color: palevioletred;
+    border-radius: 3px;
+    width:20vw;
+    animation-name: fadeOut;
+    animation-duration: 3s;
+    animation-timing-function: ease-in-out;
+    animation-delay: 2s;
+}
+dialog p{
+    margin: 0;
+    text-align: center;
+    padding: 3px
+}
+@keyframes fadeOut {
+   0% {opacity: 1;}
+   100% {opacity: 0;} 
+} 

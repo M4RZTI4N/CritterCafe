@@ -1,0 +1,9 @@
+<link rel="stylesheet" href="/css/dialog.css">
+<dialog open id="infoalert">
+    <p class="modal-text"><%= info %></p>
+</dialog>
+<script>
+    setTimeout(()=>{
+        document.getElementById("infoalert").style.display = "none";
+    },5000)
+</script>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/login.css">
+    <title>Login to Critter Cafe</title>
+</head>
+<body>
+    <%- include('_header') %>
+    <h1>Login to Critter Cafe</h1>  
+    <div id="login">
+        <form name="login" action="/api/login" method="post" onsubmit="return validateLogin()">
+            <input type="text" name="username" id="username" placeholder="Enter Username: ">
+            <input type="password" name="password" id="password" placeholder="Enter Password: ">
+            <input type="submit" value="SUBMIT">
+        </form>
+    </div>
+    
+    <script src="/js/login.js"></script>
+</body>
+</html>

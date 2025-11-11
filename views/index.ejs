@@ -5,9 +5,10 @@
         <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     </head>
     <body>
+        <%- include('_header') %>
         <h1>THIS IS THE HOMEPAGE OF CRITTERCAFE</h1>
         <% if (info) { %>
-            <h2><%= info %></h2>
+            <%- include('_modal',{info:info}) %>
         <% } %>
 
         <% if (username) { %>
