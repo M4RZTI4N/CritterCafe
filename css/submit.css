@@ -14,3 +14,6 @@ input[type=text]{
     border:3px solid black;
     border-radius: 4px;
 }
+textarea {
+    resize: none;
+}

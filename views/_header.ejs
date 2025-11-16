@@ -4,7 +4,11 @@
         <li><a href="/">Home</a></li>
         <li><a href="/submit">Submit</a></li>
         <li><a href="/search">Search</a></li>
-        <li><a href="/login">Login</a></li>
+        <% if(session.username){ %>
+            <li><a href="/profile">Profile</a></li>
+        <% } else { %>
+            <li><a href="/login">Login</a></li>
+        <% } %>
     </ul>
 </nav>
 <br>

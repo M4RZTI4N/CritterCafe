@@ -5,7 +5,7 @@
         <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     </head>
     <body>
-        <%- include('_header') %>
+        <%- include('_header',{username:username})%>
         <h1>THIS IS THE HOMEPAGE OF CRITTERCAFE</h1>
         <% if (info) { %>
             <%- include('_modal',{info:info}) %>
@@ -14,15 +14,21 @@
         <% if (username) { %>
             <h3>logged in:</h3>
             <p><%= username %></p>
-            <p><%= password %></p>
             <br>
             <a href="/api/signout">signout</a>
         <% } else { %>
-            <a href="/login">login</a>
-            <a href="/signup">sign up</a>
+            <h3>you are not signed in</h3>
+            <p>sign in to contribute to critter cafe</p>
         <% } %>
 
-
+        
+        <% if (recipes.status == "success") { %>
+            <div id="recipes">
+                <% recipes.data.forEach(function(recipe) { %>
+                    <%- include('_recipe_widget',{img:recipe.img[0],title:recipe.recipe_name,username:recipe.username}) %>
+                <% }); %>
+            </div>
+        <% } %>
         <script src="js/script.js"></script>
     </body>
 </html>

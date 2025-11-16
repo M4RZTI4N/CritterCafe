@@ -1,14 +1,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <link rel="stylesheet" href="css/submit.css">
-        <title>Submit Recipie</title>
+        <title>Submit recipe</title>
         <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     </head>
     <body>
         <%- include('_header') %>
-        <form action="/api/submit" method="post">
-            <input type="text" name="name" id="name" placeholder="Your Name">
-            
+        <form action="/api/submit" method="post" enctype="multipart/form-data">
+            <input type="text" name="name" id="name" placeholder="Recipe Name" required>
+            <input type="text" name="ingredients" id="ingredients" placeholder="Ingredients" required>
+            <textarea name="instructions" id="instructions" rows="40" cols="80" placeholder="Instructions" required></textarea>
+            <input type="file" name="images" id="images" accept="image/*" multiple>
             <input type="submit" value="SUBMIT">
         </form>
     </body>
