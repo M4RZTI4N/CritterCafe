@@ -40,7 +40,7 @@ const uri = "mongodb+srv://dev:iamastro42@cluster0.jcmziu4.mongodb.net/?appName=
 const client = new MongoClient(uri, {
   serverApi: {
     version: ServerApiVersion.v1,
-    strict: true,
+    strict: false,
     deprecationErrors: true,
   }
 });
@@ -149,6 +149,41 @@ async function addrecipe(username,recipe,ingredients,directions,img){
     return false
   }
 }
+async function searchRecipe(name){
+  try{
+    await client.connect();
+    console.log("query: ", name)
+    const pipeline = [
+      {
+        $search:{
+          index:"default",
+          text:{
+            query: name,
+            path: ["recipe_name"],
+            fuzzy:{}
+          }
+        }
+      }
+    ]
+
+    
+    let recipe = await client.db("CritterCafe").collection("Recipe").aggregate(pipeline).toArray()
+    
+    console.log(recipe)
+    return {
+      status: "success",
+      data: recipe
+    }
+  } catch (e){
+    await client.close()
+    console.error("atlas search error")
+    console.error(e)
+    return {
+      status: "error",
+      data: "something went wrong"
+    }
+  }
+}
 
 app.get('/', async (req, res) => {
   let info = req.flash("info")[0]
@@ -196,6 +231,25 @@ app.get('/profile',(req,res)=>{
     res.redirect("/")
   }
 })
+
+app.get('/browse',async (req,res)=>{
+  const query = req.query.query
+  console.log(query)
+  if(query){
+    let searchedRecipes = await searchRecipe(query)
+    res.render("browse",{
+      recipes: searchedRecipes,
+      username: req.session.username
+    })
+  } else {
+    let allRecipes = await getRecipes()
+    res.render("browse",{
+      recipes: allRecipes,
+      username: req.session.username
+    })
+  }
+})
+
 
 app.get('/recipe/:username-:title', async (req,res)=>{
   console.log("searching for:",req.params.username,req.params.title)

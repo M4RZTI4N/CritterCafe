@@ -1,0 +1,36 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <link rel="stylesheet" href="css/style.css">
+        <title>Browse Critter Cafe</title>
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+        <%- include('_universal') %>
+        <link rel="stylesheet" href="/css/browse.css">
+    </head>
+    <body>
+        <%- include('_header',{username:username})%>
+        <div id="searchbar">
+            <label for="search">Search for recipes</label>
+            <input type="search" name="search" id="search">
+            <button onclick="doSearch();">Search</button>
+        </div>
+        
+        <% if (recipes.status == "success") { %>
+            <div id="recipes">
+                <% recipes.data.forEach(function(recipe) { %>
+                    <%- include('_recipe_widget',{img:recipe.img[0],title:recipe.recipe_name,username:recipe.username}) %>
+                <% }); %>
+            </div>
+        <% } %>
+
+        <script>
+            function doSearch(){
+                let search = document.getElementById("search")
+
+                if(search.value){
+                    window.location.assign(window.location.pathname+"?query="+search.value)
+                }
+            }
+        </script>
+    </body>
+    
+</html>

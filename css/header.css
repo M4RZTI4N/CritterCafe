@@ -1,5 +1,10 @@
 #navbar {
-    width:100%;
+  width:100%;
+  position: fixed;
+  top:0;
+  width:100%;
+  left:0;
+  height:5vh;
 }
 #navbar ul {
   list-style-type: none;
@@ -8,12 +13,17 @@
   background-color: #333333;
   display: flex;
   justify-content: flex-end;
+  height:100%;
 }
-
+#navbar ul li {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width:8vw;
+}
 #navbar ul li a {
   display: block;
   color: white;
-  padding: 14px 16px;
   text-decoration: none;
 }
 

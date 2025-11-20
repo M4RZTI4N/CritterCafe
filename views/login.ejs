@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/login.css">
     <title>Login to Critter Cafe</title>
+    <%- include('_universal') %>
 </head>
 <body>
     <%- include('_header') %>
@@ -16,6 +17,11 @@
             <input type="submit" value="SUBMIT">
         </form>
     </div>
+    <div>
+        <p>don't have an account with crittercafe?</p>
+        <a href="/signup">signup!</a>
+    </div>
+    
     
     <script src="/js/login.js"></script>
 </body>

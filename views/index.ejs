@@ -1,8 +1,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
-        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/index.css">
         <title>Critter Cafe</title>
         <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+        <%- include('_universal') %>
     </head>
     <body>
         <%- include('_header',{username:username})%>
@@ -22,13 +23,7 @@
         <% } %>
 
         
-        <% if (recipes.status == "success") { %>
-            <div id="recipes">
-                <% recipes.data.forEach(function(recipe) { %>
-                    <%- include('_recipe_widget',{img:recipe.img[0],title:recipe.recipe_name,username:recipe.username}) %>
-                <% }); %>
-            </div>
-        <% } %>
+        
         <script src="js/script.js"></script>
     </body>
 </html>
