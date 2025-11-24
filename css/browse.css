@@ -25,6 +25,7 @@ a:active{
 
 .recipe_widget img {
     width:80%;
+    max-height: 15vh;
     /* padding: 1vh 1vw; */
 }
 #searchbar{

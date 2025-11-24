@@ -24,6 +24,7 @@ app.use(session({
   saveUninitialized: false
 }))
 app.use(flash())
+app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
 app.use((req,res,next)=>{
   res.locals.session = req.session;
@@ -34,6 +35,7 @@ app.set('views', path.join(__dirname, 'views'));
 
 
 const { MongoClient, ServerApiVersion } = require('mongodb');
+const { encode } = require('punycode')
 const uri = "mongodb+srv://dev:iamastro42@cluster0.jcmziu4.mongodb.net/?appName=Cluster0";
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
@@ -113,12 +115,11 @@ async function getRecipes(){
     }
   }
 }
-async function getRecipe(username,title){
+async function getRecipe(uri){
   try{
     await client.connect();
     let recipe = await client.db("CritterCafe").collection("Recipe").find({
-      username:username,
-      recipe_name: title
+      url:uri
     }).toArray();
     return recipe[0]
   } catch {
@@ -127,16 +128,75 @@ async function getRecipe(username,title){
   }
 }
 
+async function editRecipe(oldURI, new_name,new_ingredients,new_directions,removeIMG,newIMG){
+  try{
+    console.log("////////////////")
+    await client.connect();
+    let collection = await client.db("CritterCafe").collection("Recipe")
+    let response = await collection.find({
+      url:oldURI
+    }).toArray();
+    
+    let recipe = response[0]
+    console.log(recipe)
+    let docID = recipe._id
+    const filter = {_id: docID}
+    let uri = recipe.username + "-" + new_name
+    uri = uri.replace(/\s/g, "").trim();
+    let existingIMG = recipe.img
+    console.log("existing img: ",existingIMG)
+    console.log("remove img: ", removeIMG)
+    let reusltIMG = existingIMG.filter((img) => !removeIMG.includes(img))
+    console.log("post removal: ", reusltIMG)
+
+    let docIMG = newIMG.concat(reusltIMG)
+    console.log("final img list: ", docIMG)
+    const updateDoc = {
+      $set:{
+        recipe_name: new_name,
+        ingredients: new_ingredients,
+        directions: new_directions,
+        url: uri,
+        img: docIMG
+      }
+    } 
+
+    const result = await collection.updateOne(filter,updateDoc)
+    
+    console.log(result)
+    console.log("\\\\\\\\\\\\\\\\\\\\\\\\")
+
+  } catch {
+    await client.close()
+    
+  }
+}
+
+async function deleteRecipe(uri){
+  try {
+    await client.connect();
+    const collection = await client.db("CritterCafe").collection("Recipe")
+
+    const result = await collection.deleteOne({url:uri})
+
+    console.log(`${result.deletedCount} documents deleted`)
+  } catch {
+    await client.close()
+  }
+}
+
 async function addrecipe(username,recipe,ingredients,directions,img){
   try {
     await client.connect();
 
-
+    let uri = username + "-" + recipe
+    uri = uri.replace(/\s/g, "").trim();
     
     
     let logins = await client.db("CritterCafe").collection("Recipe").insertOne({
       username:username,
       recipe_name:recipe,
+      url: uri,
       ingredients: ingredients,
       directions: directions,
       img: img
@@ -250,20 +310,37 @@ app.get('/browse',async (req,res)=>{
   }
 })
 
-
-app.get('/recipe/:username-:title', async (req,res)=>{
-  console.log("searching for:",req.params.username,req.params.title)
-  let recipe = await getRecipe(req.params.username,req.params.title)
+app.get('/recipe/:uri', async (req,res)=>{
+  console.log("searching for:",req.params.uri)
+  let recipe = await getRecipe(req.params.uri)
   console.log("got recipe:",recipe)
   console.log("imgs: ", recipe.img)
-  res.render("recipe",{
-    username: recipe.username,
-    title: recipe.recipe_name,
-    ingredients: recipe.ingredients,
-    instructions: recipe.directions,
-    img: recipe.img
-  })
+
+  if (req.session.username == recipe.username){
+    res.render("edit_recipe",{
+      username: recipe.username,
+      title: recipe.recipe_name,
+      ingredients: recipe.ingredients,
+      instructions: recipe.directions,
+      img: recipe.img,
+      uri: recipe.url
+    })
+  } else {
+    res.render("recipe",{
+      username: recipe.username,
+      title: recipe.recipe_name,
+      ingredients: recipe.ingredients,
+      instructions: recipe.directions,
+      img: recipe.img,
+      uri: recipe.url
+    })
+  }
+  
 })
+
+
+
+
 
 app.post('/api/submit',upload, async (req,res)=>{
   let filepaths = []
@@ -279,6 +356,27 @@ app.post('/api/submit',upload, async (req,res)=>{
   res.redirect("/")
 })
 
+app.post('/api/edit',upload,async (req,res)=>{
+  console.log("==================== <<< EDIT DATA")
+  console.log(req.body)
+  console.log(req.files)
+  console.log("====================")
+  let filepaths = []
+  if(req.files){
+    console.log("uploaded files: ", req.files)
+    req.files.forEach(function(f){
+      filepaths.push(f.path.replace("\\","/"))
+    })
+  }
+  await editRecipe(req.body.oldURI,req.body.name,req.body.ingredients,req.body.instructions,req.body.imgRemove,filepaths)
+  res.redirect("/")
+})
+
+app.post('/api/delete',async (req,res)=>{
+  console.log("deleting ", req.body.uri)
+  await deleteRecipe(req.body.uri.trim())
+  res.redirect("/")
+})
 
 app.post('/api/login',async (req,res)=>{
   console.log("form response: ", req.body)

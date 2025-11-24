@@ -17,7 +17,7 @@
         <% if (recipes.status == "success") { %>
             <div id="recipes">
                 <% recipes.data.forEach(function(recipe) { %>
-                    <%- include('_recipe_widget',{img:recipe.img[0],title:recipe.recipe_name,username:recipe.username}) %>
+                    <%- include('_recipe_widget',{img:recipe.img[0],title:recipe.recipe_name,username:recipe.username,uri:recipe.url}) %>
                 <% }); %>
             </div>
         <% } %>
