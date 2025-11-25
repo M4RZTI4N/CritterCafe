@@ -9,6 +9,11 @@
 </head>
 <body>
     <%- include('_header') %>
+    <% if (session.username) {%>
+        <div id="rate">
+            you are logged in
+        </div>
+    <% } %>
     <h1><%= title %></h1>
     <h2>By: <%= username %></h2>
 
