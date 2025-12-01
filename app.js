@@ -248,12 +248,10 @@ async function searchRecipe(name){
 app.get('/', async (req, res) => {
   let info = req.flash("info")[0]
   console.log(info)
-  let recipes = await getRecipes();
   res.render("index",{
     "info":info,
     "username":req.session.username,
-    "password":req.session.password,
-    "recipes": recipes
+    "password":req.session.password
   })
 })
 
@@ -287,8 +285,8 @@ app.get('/profile',(req,res)=>{
       "username":req.session.username
     })
   } else {
-    req.flash("info","log in first")
-    res.redirect("/")
+    // req.flash("info","log in first")
+    res.redirect("/login")
   }
 })
 
@@ -308,6 +306,12 @@ app.get('/browse',async (req,res)=>{
       username: req.session.username
     })
   }
+})
+
+app.get('/about',(req,res)=>{
+  res.render("about",{
+    username:req.session.username
+  })
 })
 
 app.get('/recipe/:uri', async (req,res)=>{

@@ -1,26 +1,27 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Delius&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Chewy&family=Delius&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="css/index.css">
         <title>Critter Cafe</title>
         <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-        <%- include('_universal') %>
+        <!-- <%- include('_universal') %> -->
     </head>
-    <body>
-        <%- include('_header',{username:username})%>
-        <h1>THIS IS THE HOMEPAGE OF CRITTERCAFE</h1>
+    <body>        
         <% if (info) { %>
             <%- include('_modal',{info:info}) %>
         <% } %>
-
-        <% if (username) { %>
-            <h3>Logged in:</h3>
-            <p><%= username %></p>
-            <br>
-            <a href="/api/signout">Signout</a>
-        <% } else { %>
-            <h3>You are not Signed in</h3>
-            <p>Sign in to Contribute to Critter Cafe</p>
-        <% } %>
+        <map name="homepage">
+            <area shape="rect" coords="341,424,474,609" href="/profile" alt="login to critter cafe" target="_self">
+            <area shape="rect" coords="567,410,837,585" href="/browse" alt="browse recipes">
+            <area shape="rect" coords="161,608,329,818" href="/submit" alt="submit a recipe">
+            <area shape="rect" coords="919,452,1041,552" href="/about" alt="about critter cafe">
+        </map>
+        <img usemap="#homepage" src="/img/homepage.png" alt="homepage of critter cafe">
 
         
         
