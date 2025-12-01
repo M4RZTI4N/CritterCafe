@@ -1,3 +1,9 @@
+html {
+    font-family: "Delius", cursive;
+    font-weight: 400;
+    font-style: normal;
+}
+
 #diff_img{
     width:200px;
 }
@@ -39,4 +45,12 @@ a:active{
 .recipe_widget img {
     width:80%;
     /* padding: 1vh 1vw; */
+}
+
+body {
+    padding-top: 0;
+    background-color: #ece6e5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
