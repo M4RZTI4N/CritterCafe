@@ -18,16 +18,62 @@ a:active{
     width:16vw;
     margin: 2vh 2vw;
     border-radius: 10px;
-    border:2px solid black;
+    border: 2px solid rgb(190, 113, 126);
     padding: 1vh 1vw;
+    background-color: white;
     
 }
-
+h1{
+    text-align: center;
+    font-family: Chewy;
+    font-size: 60px; /* hehe six seven */
+    color: #bb6565;
+    letter-spacing: 5px;
+}
 .recipe_widget img {
     width:80%;
     max-height: 15vh;
-    /* padding: 1vh 1vw; */
+    align-content: center;
+    padding: 1vh 1vw; 
 }
 #searchbar{
-    margin-top: 10vh;
+    align-items: center;
+    display: flex;
+    gap: 2vh;
+    justify-content: center;
+    width: 80vw;
+    margin: auto;
+    padding: 1vh 1vw;
+    margin-top: 1vh;
+    margin-bottom: 5px;
+}
+#searchbar label{
+    font-weight: 670;  /* haha six sevennn */
+    color: #6e3a3f;
+}
+#searchbar input[type="search"]{
+    padding: 8px 14px;
+    border-radius: 999px;
+    border: 2px solid rgb(190, 113, 126);
+    font-size: 14px;
+    width: 320px;
+    max-width: 60%;
+}
+#searchbar input[type="search"]:focus{
+    outline: none;
+  
+
+}
+#searchbar button{
+    padding: 8px 14px;
+    border-radius: 999px;
+    border: none;
+    background: rgb(190, 113, 126);
+    color: #ffffff;
+    cursor: pointer;   
+    font-size: 14px;
+}
+
+html {
+    background-color:#ffeaea;
 }

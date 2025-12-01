@@ -7,9 +7,10 @@
         <link rel="stylesheet" href="/css/browse.css">
     </head>
     <body>
+        <h1>Browse Recipes</h1>
         <%- include('_header',{username:username})%>
         <div id="searchbar">
-            <label for="search">Search for recipes</label>
+            <label for="search">Search for recipes:</label>
             <input type="search" name="search" id="search">
             <button onclick="doSearch();">Search</button>
         </div>
