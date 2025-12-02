@@ -311,10 +311,70 @@ async function novote(username, uri){
     await client.close()
   }
 }
+async function addFav(username, uri){
+  try {
 
+    await client.connect();
+    let db = await client.db("CritterCafe")
+    let users = await db.collection("Logins")
 
+    let result = await users.updateOne(
+      {username:username},{
+        $addToSet:{
+          favorites: uri
+        }
+      }
+    )
+    console.log("add fav: docs matched",result.matchedCount,"docs changed",result.modifiedCount)
+  } catch {
+    await client.close()
+  }
+}
+async function removeFav(username, uri){
+  try {
 
+    await client.connect();
+    let db = await client.db("CritterCafe")
+    let users = await db.collection("Logins")
 
+    let result = await users.updateOne(
+      {username:username},{
+        $pull:{
+          favorites: uri
+        }
+      }
+    )
+    console.log("remove fav: docs matched",result.matchedCount,"docs changed",result.modifiedCount)
+  } catch {
+    await client.close()
+  }
+}
+async function getFavs(username){
+  try{
+    await client.connect();
+    let user = await client.db("CritterCafe").collection("Logins").find({
+      username: username
+    }).toArray();
+    return user[0].favorites
+  } catch {
+    await client.close()
+    
+  }
+}
+async function getRecipiesFromFav(fav_list){
+  try{
+    await client.connect();
+    let recipes = await client.db("CritterCafe").collection("Recipe").find({
+      url:{
+        $in:fav_list
+      }
+    }).toArray();
+    return recipes
+  } catch {
+    await client.close()
+    return null
+  }
+}
 
 
 
@@ -358,10 +418,13 @@ app.get('/submit',(req,res)=>{
   
 })
 
-app.get('/profile',(req,res)=>{
+app.get('/profile',async (req,res)=>{
   if(req.session.username){
+    let favs = await getFavs(req.session.username)
+    let fav_list = await getRecipiesFromFav(favs)
     res.render("profile",{
-      "username":req.session.username
+      "username":req.session.username,
+      "favs":fav_list
     })
   } else {
     // req.flash("info","log in first")
@@ -398,6 +461,10 @@ app.get('/recipe/:uri', async (req,res)=>{
   let recipe = await getRecipe(req.params.uri)
   console.log("got recipe:",recipe)
   console.log("imgs: ", recipe.img)
+  let fav_list = []
+  if(req.session.username){
+    fav_list = await getFavs(req.session.username)
+  }
 
   if (req.session.username == recipe.username){
     res.render("edit_recipe",{
@@ -408,7 +475,8 @@ app.get('/recipe/:uri', async (req,res)=>{
       img: recipe.img,
       uri: recipe.url,
       likes:recipe.likes,
-      dislikes:recipe.dislikes
+      dislikes:recipe.dislikes,
+      favs: fav_list
     })
   } else {
     res.render("recipe",{
@@ -419,7 +487,8 @@ app.get('/recipe/:uri', async (req,res)=>{
       img: recipe.img,
       uri: recipe.url,
       likes:recipe.likes,
-      dislikes:recipe.dislikes
+      dislikes:recipe.dislikes,
+      favs: fav_list
     })
   }
   
@@ -514,7 +583,6 @@ app.post('/api/downvote',async (req,res)=>{
     await downvote(req.session.username,req.body.url)
   }
 })
-
 app.post('/api/novote',async (req,res)=>{
   if(req.session.username){
     console.log("got novote from ", req.session.username)
@@ -522,8 +590,20 @@ app.post('/api/novote',async (req,res)=>{
     await novote(req.session.username,req.body.url)
   }
 })
-
-
+app.post('/api/addFav',async (req,res)=>{
+  if(req.session.username){
+    console.log("got add fav from ", req.session.username)
+    console.log(req.body)
+    await addFav(req.session.username,req.body.url)
+  }
+})
+app.post('/api/removeFav',async (req,res)=>{
+  if(req.session.username){
+    console.log("got remove fav from ", req.session.username)
+    console.log(req.body)
+    await removeFav(req.session.username,req.body.url)
+  }
+})
 
 
 

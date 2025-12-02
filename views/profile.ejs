@@ -21,5 +21,15 @@
             <a href="/api/signout">Signout</a>
         </div>
     </div>
+    <h1>Your Favorite Recipes</h1>
+    <% if(favs.length > 0) { %>
+        <div id="recipes">
+            <% favs.forEach(function(recipe) { %>
+                <%- include('_recipe_widget',{img:recipe.img[0],title:recipe.recipe_name,username:recipe.username,uri:recipe.url,likes:recipe.likes,dislikes:recipe.dislikes}) %>
+            <% }); %>
+        </div>
+    <% } else { %>
+        <h2>You don't have any favorite recipes</h2>
+    <% } %>
 </body>
 </html>

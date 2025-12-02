@@ -1,8 +1,10 @@
 <a href="/recipe/<%- uri %>">
 <div class="recipe_widget">
     <img src="../<%= img %>" alt="">
-    <h3><%= title %></h3>
-    <p>by: <%= username %></p>
+    <div>
+        <h3><%= title %></h3>
+        <p>by: <%= username %></p>
+    </div>
     <% if(likes.length-dislikes.length > 0){ %>
         <span class="vote_good"><%= likes.length-dislikes.length %></span>
     <% } else if(likes.length-dislikes.length < 0){%>
