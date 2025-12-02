@@ -89,7 +89,8 @@ async function addLogin(user,pass){
     
     let logins = await client.db("CritterCafe").collection("Logins").insertOne({
       username:user,
-      password:pass
+      password:pass,
+      favorites:[]
     })
 
     return true
@@ -199,7 +200,9 @@ async function addrecipe(username,recipe,ingredients,directions,img){
       url: uri,
       ingredients: ingredients,
       directions: directions,
-      img: img
+      img: img,
+      likes:[],
+      dislikes:[]
     })
 
     return true
@@ -242,6 +245,19 @@ async function searchRecipe(name){
       status: "error",
       data: "something went wrong"
     }
+  }
+}
+
+async function upvote(username, recipe){
+  try {
+    await client.connect();
+    let db = await client.db("CritterCafe")
+    let recipes = await db.collection("Recipe")
+   
+    
+
+  } catch {
+    await client.close()
   }
 }
 
@@ -415,6 +431,10 @@ app.get('/api/signout',async (req,res)=>{
   delete req.session.data
   req.flash("info","you have been signed out")
   res.redirect("/")
+})
+
+app.post('/api/upvote',async (req,res)=>{
+
 })
 
 app.use('/css',express.static("css"))

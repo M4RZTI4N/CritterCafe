@@ -4,18 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= username %>'s <%= title %> recipe</title>
-    <link rel="stylesheet" href="css/recipe.css">
+    
     <%- include('_universal') %>
+    <link rel="stylesheet" href="/css/recipe.css">
 </head>
 <body>
     <%- include('_header') %>
     <% if (session.username) {%>
         <div id="rate">
-            You are Logged in
+            <img src="/img/cat_like.png" alt="" class="vote" id="like">
+            <img src="/img/cat_dislike.png" alt="" class="vote" id="dislike">
+            <img src="/img/fav.png" id="favorite" class="vote" alt="">
         </div>
     <% } %>
-    <h1><%= title %></h1>
-    <h2>By: <%= username %></h2>
+    <input type="hidden" name="">
+    <h1 id="title"><%= title %></h1>
+    <h2 id="username">By: <%= username %></h2>
 
     <h3>Ingredients:</h3>
     <p><%= ingredients %></p>
@@ -25,8 +29,9 @@
 
     <div id="img_container">
         <% img.forEach(function(i){ %>
-            <img src="../<%= i %>" alt="">
+            <img class="recipe_img" src="../<%= i %>" alt="">
         <% }) %>
     </div>
+    <script src="/js/recipe.js"></script>
 </body>
 </html>
