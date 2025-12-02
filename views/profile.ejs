@@ -10,11 +10,16 @@
 <body>
     <%- include('_header') %>
     <div id="text">
-        <h1>You Logged In!</h1>
-        <h2>Logged In As: <%= username %></h2>
-        <br>
-        <a href="/">Go Home</a>
-        <a href="/api/signout">Signout</a>
+        <h1>You're Logged In!</h1>
+        <div id="extra">
+            <h2>Logged In As: <span><%= username %></span></h2>
+            <br>
+            <a href="/">Go Home</a>
+            <br>
+            <br>
+            <br>
+            <a href="/api/signout">Signout</a>
+        </div>
     </div>
 </body>
 </html>
