@@ -31,4 +31,4 @@ Thumbs.db
 *.tmp
 *.bak
 
-/uploads
+# /uploads
