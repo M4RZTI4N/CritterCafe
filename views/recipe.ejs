@@ -12,8 +12,18 @@
     <%- include('_header') %>
     <% if (session.username) {%>
         <div id="rate">
-            <img src="/img/cat_like.png" alt="" class="vote" id="like">
-            <img src="/img/cat_dislike.png" alt="" class="vote" id="dislike">
+            <% if(likes.includes(session.username)) {%>
+                <img src="/img/cat_like.png" alt="" class="vote active" id="like">
+            <% } else {%>
+                <img src="/img/cat_like_inactive.png" alt="" class="vote" id="like">
+            <% } %>
+
+            <% if(dislikes.includes(session.username)) {%>
+                <img src="/img/cat_dislike.png" alt="" class="vote active" id="dislike">
+            <% } else {%>
+                <img src="/img/cat_dislike_inactive.png" alt="" class="vote" id="dislike">
+            <% } %>
+            
             <img src="/img/fav.png" id="favorite" class="vote" alt="">
         </div>
     <% } %>

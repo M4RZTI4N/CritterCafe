@@ -248,18 +248,81 @@ async function searchRecipe(name){
   }
 }
 
-async function upvote(username, recipe){
+async function upvote(username, uri){
   try {
+
     await client.connect();
     let db = await client.db("CritterCafe")
     let recipes = await db.collection("Recipe")
-   
+
+    let result = await recipes.updateOne(
+      {url:uri},{
+        $addToSet:{
+          likes: username
+        },
+        $pull:{
+          dislikes: username
+        }
+      }
+    )
+    console.log("upvote: docs matched",result.matchedCount,"docs changed",result.modifiedCount)
     
 
   } catch {
     await client.close()
   }
 }
+async function downvote(username, uri){
+  try {
+    await client.connect();
+    let db = await client.db("CritterCafe")
+    let recipes = await db.collection("Recipe")
+    let result = await recipes.updateOne(
+      {url:uri},{
+        $pull:{
+          likes: username
+        },
+        $addToSet:{
+          dislikes: username
+        }
+      }
+    )
+    console.log("downvote: docs matched",result.matchedCount,"docs changed",result.modifiedCount)
+
+  } catch {
+    await client.close()
+  }
+}
+async function novote(username, uri){
+  try {
+    await client.connect();
+    let db = await client.db("CritterCafe")
+    let recipes = await db.collection("Recipe")
+    let result = await recipes.updateOne(
+      {url:uri},{
+        $pull:{
+          likes: username,
+          dislikes: username
+        }
+    })
+    console.log("novote: docs matched",result.matchedCount,"docs changed",result.modifiedCount)
+
+  } catch {
+    await client.close()
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 app.get('/', async (req, res) => {
   let info = req.flash("info")[0]
@@ -343,7 +406,9 @@ app.get('/recipe/:uri', async (req,res)=>{
       ingredients: recipe.ingredients,
       instructions: recipe.directions,
       img: recipe.img,
-      uri: recipe.url
+      uri: recipe.url,
+      likes:recipe.likes,
+      dislikes:recipe.dislikes
     })
   } else {
     res.render("recipe",{
@@ -352,7 +417,9 @@ app.get('/recipe/:uri', async (req,res)=>{
       ingredients: recipe.ingredients,
       instructions: recipe.directions,
       img: recipe.img,
-      uri: recipe.url
+      uri: recipe.url,
+      likes:recipe.likes,
+      dislikes:recipe.dislikes
     })
   }
   
@@ -434,8 +501,32 @@ app.get('/api/signout',async (req,res)=>{
 })
 
 app.post('/api/upvote',async (req,res)=>{
-
+  if(req.session.username){
+    console.log("got upvote from ", req.session.username)
+    console.log(req.body)
+    await upvote(req.session.username,req.body.url)
+  }
 })
+app.post('/api/downvote',async (req,res)=>{
+  if(req.session.username){
+    console.log("got downvote from ", req.session.username)
+    console.log(req.body)
+    await downvote(req.session.username,req.body.url)
+  }
+})
+
+app.post('/api/novote',async (req,res)=>{
+  if(req.session.username){
+    console.log("got novote from ", req.session.username)
+    console.log(req.body)
+    await novote(req.session.username,req.body.url)
+  }
+})
+
+
+
+
+
 
 app.use('/css',express.static("css"))
 app.use('/js',express.static("js"))
