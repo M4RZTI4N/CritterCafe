@@ -1,5 +1,6 @@
 const vote_like = document.getElementById("like");
 const vote_dislike = document.getElementById("dislike")
+const fav = document.getElementById("favorite")
 const url = (document.getElementById("username").innerText + "-" + document.getElementById("title").innerText).slice(4).replace(/\s/g, "").trim();
 console.log("url: ", url)
 
@@ -70,3 +71,33 @@ vote_dislike.addEventListener("click", () => {
     }
 })
 
+fav.addEventListener("click", () => {
+    if (fav.classList.contains("active")) { //unfavorite
+        fetch("../api/removeFav", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                "url": url
+            })
+        })
+        
+        fav.src = "/img/fav_inactive.png"
+        fav.classList.remove("active")
+
+    } else { // going from neutral/like -> dislike
+        fetch("../api/addFav", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                "url": url
+            })
+        })
+
+        fav.src = "/img/fav.png"
+        fav.classList.add("active")
+    }
+})

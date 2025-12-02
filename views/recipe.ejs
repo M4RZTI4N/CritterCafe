@@ -24,7 +24,12 @@
                 <img src="/img/cat_dislike_inactive.png" alt="" class="vote" id="dislike">
             <% } %>
             
-            <img src="/img/fav.png" id="favorite" class="vote" alt="">
+            <% if(favs.includes(uri)) {%>
+                <img src="/img/fav.png" id="favorite" class="vote active" alt="">
+            <% } else {%>
+                <img src="/img/fav_inactive.png" id="favorite" class="vote" alt="">
+            <% } %>
+            
         </div>
     <% } %>
     <input type="hidden" name="">

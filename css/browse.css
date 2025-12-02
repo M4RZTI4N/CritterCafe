@@ -21,6 +21,7 @@ a:active{
 
 .recipe_widget {
     width:16vw;
+    height: 17vw;
     margin: 2vh 2vw;
     border-radius: 10px;
     border: 4px solid rgb(190, 113, 126);
@@ -28,13 +29,12 @@ a:active{
     background-color: white;
     position: relative;
 }
-
-h1{
-    text-align: center;
-    font-family: Chewy;
-    font-size: 60px; /* hehe six seven */
-    color: #bb6565;
-    letter-spacing: 5px;
+.recipe_widget div{
+    position: absolute;
+    bottom:0;
+    margin: auto;
+    width: auto;
+    padding: 1vh 1vw;
 }
 .recipe_widget h3, .recipe_widget p {
     margin: 2vh 0;
@@ -42,14 +42,15 @@ h1{
 }
 .recipe_widget img {
     width:80%;
-    max-height: 15vh;
+    max-height: 19vh;
+    width: auto;
     align-content: center;
     padding: 1vh 1vw; 
-    
+    margin: auto;
 }
 .recipe_widget span{
     position: absolute;
-    bottom:1vh;
+    bottom:0vh;
     right:1vw;
     /* padding: 1vh 1vw; */
     margin: 2vh 0px;
@@ -63,6 +64,15 @@ h1{
 .vote_neutral{
     color:grey;
 }
+
+h1{
+    text-align: center;
+    font-family: Chewy;
+    font-size: 60px; /* hehe six seven */
+    color: #bb6565;
+    letter-spacing: 5px;
+}
+
 
 #searchbar{
     align-items: center;
