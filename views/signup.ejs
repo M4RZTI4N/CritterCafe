@@ -9,13 +9,19 @@
 </head>
 <body>
     <%- include('_header') %>
-    <h1>Sign Up for Critter Cafe</h1>
+    <div id="signup">
+        <h1>Sign Up for Critter Cafe!</h1>
+    </div>
     <p id="errormsg"></p>
-    <form name="login" action="/api/signup" method="post" onsubmit="return validateLogin()">
-        <input type="text" name="username" id="username" placeholder="Enter Username: ">
-        <input type="password" name="password" id="password" placeholder="Enter Password: ">
-        <input type="password" name="confirm" id="confirm" placeholder="Confirm Password: ">
-        <input type="submit" value="SUBMIT">
+    <div id="forms">
+        <form name="login" action="/api/signup" method="post" onsubmit="return validateLogin()">
+            <input type="text" name="username" id="username" placeholder="Enter Username: ">
+            <br>
+            <input type="password" name="password" id="password" placeholder="Enter Password: ">
+            <input type="password" name="confirm" id="confirm" placeholder="Confirm Password: ">
+            <br> <br>
+            <input type="submit" value="SUBMIT">
+    </div>
     </form>
 
     <script src="/js/signup.js"></script>
