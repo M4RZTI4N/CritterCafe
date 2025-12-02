@@ -2,6 +2,13 @@
 <div class="recipe_widget">
     <img src="../<%= img %>" alt="">
     <h3><%= title %></h3>
-    <p>By: <%= username %></p>
+    <p>by: <%= username %></p>
+    <% if(likes.length-dislikes.length > 0){ %>
+        <span class="vote_good"><%= likes.length-dislikes.length %></span>
+    <% } else if(likes.length-dislikes.length < 0){%>
+        <span class="vote_bad"><%= likes.length-dislikes.length %></span>
+    <% } else { %>
+        <span class="vote_neutral"><%= likes.length-dislikes.length %></span>
+    <% } %>
 </div>
 </a>
