@@ -1,0 +1,30 @@
+html {
+    background-color:#ffeaea;
+}
+
+h1, h2, a{
+    text-align: center;
+    align-items: center;
+}
+
+h1 {
+    width: 30%;
+    font-size: 40px;
+    color: #bb6565;
+    letter-spacing: 5px;
+    border: 2px solid rgb(171, 94, 107);
+    border-radius: 40px;
+    padding: 40px;
+    background:#ffd8d8;
+}
+
+#text {
+    display: flex;
+    flex-direction: column;
+    font-family: Chewy;
+    align-items: center;
+}
+
+h2{
+    background:#ffd8d8;
+}

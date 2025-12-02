@@ -3,15 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/profile.css">
     <title>Profile</title>
     <%- include('_universal') %>
 </head>
 <body>
     <%- include('_header') %>
-    <h1>You logged in!</h1>
-    <h2>Logged in as username: <%= username %></h2>
-    <br>
-    <a href="/">Go Home</a>
-    <a href="/api/signout">Signout</a>
+    <div id="text">
+        <h1>You Logged In!</h1>
+        <h2>Logged In As: <%= username %></h2>
+        <br>
+        <a href="/">Go Home</a>
+        <a href="/api/signout">Signout</a>
+    </div>
 </body>
 </html>
