@@ -15,7 +15,7 @@ a:active{
 }
 
 h1 {
-    width: 30%;
+    width: 40%;
     font-size: 50px;
     color: #bb6565;
     letter-spacing: 5px;
@@ -72,6 +72,12 @@ h2 {
 h2 span{
     color:#e88f8f;
 }
+
+hr.rounded{
+    border-top: 50px solid rgb(230, 171, 179);
+    border-radius: 20px;
+}
+
 #recipes{
     width: 80vw;
     display: flex;
@@ -84,6 +90,7 @@ h2 span{
     font-size: 25px;
     letter-spacing: 5px;
 }
+
 .recipe_widget {
     width:16vw;
     height: 17vw;
@@ -98,6 +105,7 @@ h2 span{
     justify-content: flex-start;
     flex-direction: column;
 }
+
 .recipe_widget div{
     position: absolute;
     bottom:0;
@@ -105,10 +113,12 @@ h2 span{
     width: auto;
     padding: 1vh 1vw;
 }
+
 .recipe_widget h3, .recipe_widget p {
     margin: 2vh 0;
     /* padding: 1vw 1vh; */
 }
+
 .recipe_widget img {
     width:80%;
     max-height: 19vh;
@@ -117,6 +127,7 @@ h2 span{
     padding: 1vh 1vw; 
     /* margin: auto; */
 }
+
 .recipe_widget span{
     position: absolute;
     bottom:0vh;
@@ -124,17 +135,39 @@ h2 span{
     /* padding: 1vh 1vw; */
     margin: 2vh 0px;
 }
+
 .vote_good{
-    color: green;
+    color: rgb(101, 159, 101);
 }
+
 .vote_bad{
-    color: red;
+    color: rgb(155, 64, 64);
 }
+
 .vote_neutral{
     color:grey;
 }
+
 .recipe_widget:hover {
     
     border: 4px solid rgb(235, 169, 180);
     color: rgb(235, 169, 180);
+}
+
+
+
+#text2 h3{
+    font-family: Chewy;
+    align-items: center;
+    text-align: center;
+    width: 50%;
+    font-size: 50px;
+    color: #bb6565;
+    letter-spacing: 5px;
+    border-radius: 60px;
+    padding: 20px;
+    border: 6px dotted rgb(171, 94, 107);
+    background: #ffd8d8;
+    margin-left: auto;
+    margin-right: auto;
 }

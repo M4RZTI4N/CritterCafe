@@ -21,7 +21,14 @@
             <a href="/api/signout">Signout</a>
         </div>
     </div>
-    <h1>Your Favorite Recipes</h1>
+    <br>
+    <br>
+    <br>
+    <hr class="rounded">
+    <br>
+    <div id="text2">
+        <h3>Your Favorite Recipes</h3>
+    </div>
     <% if(favs.length > 0) { %>
         <div id="recipes">
             <% favs.forEach(function(recipe) { %>
@@ -29,7 +36,7 @@
             <% }); %>
         </div>
     <% } else { %>
-        <h2>You don't have any favorite recipes</h2>
+        <h2>You Don't Have Any Favorited Recipes</h2>
     <% } %>
 </body>
 </html>
