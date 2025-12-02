@@ -28,6 +28,10 @@ a:active{
     padding: 1vh 1vw;
     background-color: white;
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
 }
 .recipe_widget div{
     position: absolute;
@@ -46,7 +50,7 @@ a:active{
     width: auto;
     align-content: center;
     padding: 1vh 1vw; 
-    margin: auto;
+    /* margin: auto; */
 }
 .recipe_widget span{
     position: absolute;
@@ -137,11 +141,7 @@ html {
 }
 
 .recipe_widget:hover {
-    width:16vw;
-    margin: 2vh 2vw;
-    border-radius: 10px;
+    
     border: 4px solid rgb(235, 169, 180);
-    padding: 1vh 1vw;
-    background-color: white;
     color: rgb(235, 169, 180);
 }
