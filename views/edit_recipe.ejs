@@ -7,7 +7,7 @@
   <title>
     <%= username %>'s <%= title %> Recipe
   </title>
-  <link rel="stylesheet" href="css/recipe.css">
+  <link rel="stylesheet" href="/css/recipe.css">
   <%- include('_universal') %>
 </head>
 
@@ -20,6 +20,24 @@
   <form action="/api/edit" method="post" enctype="multipart/form-data">
     <input type="text" name="name" id="name" placeholder="Recipe Name" value="<%= title %>" required>
     <h2>By: <%= username %></h2>
+    <div id="allergen_box">
+        <% ['eggs','dairy','gluten','nuts','vegan'].forEach(function(i){ %>
+          <% if(allergens.includes(i)) { %>
+            <div class="allergen">
+            <input type="checkbox" name="<%= i %>" id="<%= i %>" checked>
+            <label for="<%= i %>">
+                <img src="/img/P<%= i %>.png" alt="">
+            </label></div>
+          <% } else {%>
+            <div class="allergen">
+            <input type="checkbox" name="<%= i %>" id="<%= i %>">
+            <label for="<%= i %>">
+                <img src="/img/<%= i %>.png" alt="">
+            </label></div>
+          <% } %>
+        <% }) %>
+      
+    </div>
     <textarea type="text" name="ingredients" rows="40" cols="80" id="ingredients" placeholder="Ingredients" required><%= ingredients %></textarea>
     <textarea name="instructions" id="instructions" rows="40" cols="80" placeholder="Instructions" required><%= instructions %></textarea>
     <div id="img_container">

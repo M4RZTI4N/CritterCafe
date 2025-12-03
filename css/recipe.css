@@ -21,3 +21,22 @@ html{
 p {
     white-space: pre-wrap;
 }
+.allergen_img{
+    width:5vh;
+    height:5vh;
+}
+#allergen_box {
+    max-width: 50vw;
+    height:fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.allergen{
+    height:fit-content;
+    width:10vw;
+    padding:2vh 2vw;
+}
+.allergen img{
+    max-width: 5vw;
+}

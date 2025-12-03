@@ -9,10 +9,47 @@
         <%- include('_header') %>
         <form action="/api/submit" method="post" enctype="multipart/form-data">
             <input type="text" name="name" id="name" placeholder="Recipe Name" required>
+            <div id="allergen_box">
+                <div class="allergen">
+                    <input type="checkbox" name="nuts" id="nuts">
+                    <label for="nuts">
+                        <img src="/img/nuts.png" alt="">
+                    </label>
+                </div>
+                
+                <div class="allergen">
+                    <input type="checkbox" name="dairy" id="dairy">
+                    <label for="dairy">
+                        <img src="/img/dairy.png" alt="">
+                    </label>
+                </div>
+
+                <div class="allergen">
+                    <input type="checkbox" name="eggs" id="eggs">
+                    <label for="eggs">
+                        <img src="/img/eggs.png" alt="">
+                    </label>
+                </div>
+
+                <div class="allergen">
+                    <input type="checkbox" name="gluten" id="gluten">
+                    <label for="gluten">
+                        <img src="/img/gluten.png" alt="">
+                    </label>
+                </div>
+
+                <div class="allergen">
+                    <input type="checkbox" name="vegan" id="vegan">
+                    <label for="vegan">
+                        <img src="/img/vegan.png" alt="">
+                    </label>
+                </div>
+            </div>
             <textarea type="text" name="ingredients" id="ingredients" placeholder="Ingredients" required></textarea>
             <textarea name="instructions" id="instructions" rows="40" cols="80" placeholder="Instructions" required></textarea>
             <input type="file" name="images" id="images" accept="image/*" multiple>
             <input type="submit" value="SUBMIT">
         </form>
+        <script src="/js/submit.js"></script>
     </body>
 </html>

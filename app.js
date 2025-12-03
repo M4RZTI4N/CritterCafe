@@ -129,7 +129,7 @@ async function getRecipe(uri){
   }
 }
 
-async function editRecipe(oldURI, new_name,new_ingredients,new_directions,removeIMG,newIMG){
+async function editRecipe(oldURI, new_name,new_ingredients,new_directions,removeIMG,newIMG,allergens){
   try{
     console.log("////////////////")
     await client.connect();
@@ -158,7 +158,8 @@ async function editRecipe(oldURI, new_name,new_ingredients,new_directions,remove
         ingredients: new_ingredients,
         directions: new_directions,
         url: uri,
-        img: docIMG
+        img: docIMG,
+        allergens: allergens
       }
     } 
 
@@ -186,7 +187,7 @@ async function deleteRecipe(uri){
   }
 }
 
-async function addrecipe(username,recipe,ingredients,directions,img){
+async function addrecipe(username,recipe,ingredients,directions,img,allergens){
   try {
     await client.connect();
 
@@ -202,7 +203,8 @@ async function addrecipe(username,recipe,ingredients,directions,img){
       directions: directions,
       img: img,
       likes:[],
-      dislikes:[]
+      dislikes:[],
+      allergens:allergens
     })
 
     return true
@@ -476,6 +478,7 @@ app.get('/recipe/:uri', async (req,res)=>{
       uri: recipe.url,
       likes:recipe.likes,
       dislikes:recipe.dislikes,
+      allergens:recipe.allergens,
       favs: fav_list
     })
   } else {
@@ -488,6 +491,7 @@ app.get('/recipe/:uri', async (req,res)=>{
       uri: recipe.url,
       likes:recipe.likes,
       dislikes:recipe.dislikes,
+      allergens:recipe.allergens,
       favs: fav_list
     })
   }
@@ -506,9 +510,13 @@ app.post('/api/submit',upload, async (req,res)=>{
       filepaths.push(f.path.replace("\\","/"))
     })
   }
-
-  let success = await addrecipe(req.session.username,req.body.name,req.body.ingredients,req.body.instructions,filepaths)
   console.log(req.body)
+  let data = req.body //why do i have to do this 
+  let keys = Object.keys(data)
+  let allergens = keys.filter(key => data[key] === "on");
+  console.log(allergens)
+  let success = await addrecipe(req.session.username,req.body.name,req.body.ingredients,req.body.instructions,filepaths,allergens)
+  
   res.redirect("/")
 })
 
@@ -524,7 +532,11 @@ app.post('/api/edit',upload,async (req,res)=>{
       filepaths.push(f.path.replace("\\","/"))
     })
   }
-  await editRecipe(req.body.oldURI,req.body.name,req.body.ingredients,req.body.instructions,req.body.imgRemove,filepaths)
+  let data = req.body //why do i have to do this 
+  let keys = Object.keys(data)
+  let allergens = keys.filter(key => data[key] === "on");
+  console.log(allergens)
+  await editRecipe(req.body.oldURI,req.body.name,req.body.ingredients,req.body.instructions,req.body.imgRemove,filepaths,allergens)
   res.redirect("/")
 })
 

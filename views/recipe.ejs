@@ -35,6 +35,12 @@
     <input type="hidden" name="">
     <h1 id="title"><%= title %></h1>
     <h2 id="username">By: <%= username %></h2>
+    
+    <div id="allergens">
+        <% allergens.forEach(function(i){ %>
+            <img class="allergen_img" src="/img/P<%= i %>.png" alt="">
+        <% }) %>
+    </div>
 
     <h3>Ingredients:</h3>
     <p><%= ingredients %></p>
