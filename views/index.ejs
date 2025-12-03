@@ -15,16 +15,16 @@
         <% if (info) { %>
             <%- include('_modal',{info:info}) %>
         <% } %>
-        <map name="homepage">
-            <area shape="rect" coords="341,424,474,609" href="/profile" alt="login to critter cafe" target="_self">
-            <area shape="rect" coords="567,410,837,585" href="/browse" alt="browse recipes">
-            <area shape="rect" coords="161,608,329,818" href="/submit" alt="submit a recipe">
-            <area shape="rect" coords="919,452,1041,552" href="/about" alt="about critter cafe">
+        <map id="homepage_map" name="homepage">
+            <area shape="rect" coords="1147,1151,1920,2055" href="/profile" alt="login to critter cafe" target="_self">
+            <area shape="rect" coords="2134,956,2779,1967" href="/browse" alt="browse recipes">
+            <area shape="rect" coords="937,1669,1256,2232" href="/submit" alt="submit a recipe">
+            <area shape="rect" coords="3027,1200,3418,1447" href="/about" alt="about critter cafe">
         </map>
-        <img usemap="#homepage" src="/img/homepage.png" alt="homepage of critter cafe">
+        <img id="homepage_img" usemap="#homepage" src="/img/homepage.png" alt="homepage of critter cafe">
 
         
         
-        <script src="js/script.js"></script>
+        <script src="/js/index.js"></script>
     </body>
 </html>
