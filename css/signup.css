@@ -62,7 +62,7 @@ form input {
 
 form input:hover {
     background: rgb(253, 198, 207);
-    border: 2px solid rgb(195, 123, 135);
+    border: 4px solid rgb(195, 123, 135);
 }
 
 #forms{
