@@ -1,6 +1,50 @@
-p {
-  display: block !important;
-  white-space: normal !important;
-  margin: 1em 0;
-  line-height: 1.5;
+body {
+    background-color: #ffeaea;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 40px;
+    font-family: 'Chewy', cursive;
+}
+
+.about-container {
+    text-align: center;
+    max-width: 800px;
+    width: 90%;
+}
+
+.about-page-title {
+    font-size: 48px;
+    color: #ff7f91;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+}
+
+.about-paragraph {
+    background-color: #fff7e6;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    line-height: 1.6;
+    letter-spacing: 2px;
+    font-size: 18px;
+    margin-bottom: 40px;
+}
+
+.about-gif {
+    display: block;
+    margin: 0 auto 20px;
+    width: 50%;
+    max-width: 400px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    cursor: pointer; /* indicates it’s clickable */
+}
+
+.pet-counter {
+    font-family: 'Chewy', cursive;
+    font-size: 24px;
+    color: #ff7f91;
+    margin-top: 10px;
+    text-align: center;
 }

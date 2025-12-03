@@ -6,17 +6,39 @@
     <title>About Critter Cafe</title>
     <%- include('_universal') %>
     <link rel="stylesheet" href="/css/about.css">
-
 </head>
 <body>
-    <%- include('_header',{username:username})%>
-    <p>This is Critter Cafe! Your one-stop pet shop for storing and sharing your yummiest recipies!
-       Write down your recipies for others to view and give feedback on ones others post!
-       This cafe was made by five talented developers at Purdue University-in just a few months!
-       Who said a bunch of polytechnic nerds couldn't make a website with cute animals?
-       (Absolutely no one doubted us...but every good story needs conflict)
-       Website developed by Maaz Zubair, Jae Reynolds, Rei Miles, Katelyn Schein, Jayden Wijeyakulasuriya, and Effie [LastName]
-       Have fun navigating the cafe, and don't forget to pet the cat!
-    </p>
+    <%- include('_header', {username: username}) %>
+
+    <div class="about-container">
+        <h1 class="about-page-title">About Us!</h1>
+
+        <p class="about-paragraph">
+            🐾 This is Critter Cafe! Your one-stop pet shop for storing and sharing your yummiest recipes!<br><br>
+            Write down your recipes for others to view and give feedback on ones others post!<br><br>
+            This cafe was made by five talented developers at Purdue University—in just a few months!<br><br>
+            Who said a bunch of polytechnic nerds couldn't make a website with cute animals?<br><br>
+            (Absolutely no one doubted us...but every good story needs conflict)<br><br>
+            Website developed by Maaz Zubair, Jae Reynolds, Madison Miles, Katelyn Schein, Jayden Wijeyakulasuriya, and Effie [LastName]<br><br>
+            Have fun navigating the cafe, and don't forget to pet the cat! 🐱
+        </p>
+
+        <img src="/img/cat5.gif" alt="Cute cat GIF" class="about-gif" id="pet-cat">
+
+        <div class="pet-counter">
+            Pets: <span id="pet-count">0</span>
+        </div>
+    </div>
+
+    <script>
+        const cat = document.getElementById('pet-cat');
+        const counter = document.getElementById('pet-count');
+        let pets = 0;
+
+        cat.addEventListener('click', () => {
+            pets += 1;
+            counter.textContent = pets;
+        });
+    </script>
 </body>
 </html>
