@@ -15,16 +15,25 @@
         <% if (info) { %>
             <%- include('_modal',{info:info}) %>
         <% } %>
-        <map id="homepage_map" name="homepage">
-            <area shape="rect" coords="1147,1151,1920,2055" href="/profile" alt="login to critter cafe" target="_self">
-            <area shape="rect" coords="2134,956,2779,1967" href="/browse" alt="browse recipes">
-            <area shape="rect" coords="937,1669,1256,2232" href="/submit" alt="submit a recipe">
-            <area shape="rect" coords="3027,1200,3418,1447" href="/about" alt="about critter cafe">
-        </map>
-        <img id="homepage_img" usemap="#homepage" src="/img/homepage.png" alt="homepage of critter cafe">
+        <div id="homepage_container">
+            <map id="homepage_map" name="homepage">
+                <area shape="rect" coords="1147,1151,1920,2055" href="/profile" alt="login to critter cafe" target="_self">
+                <area shape="rect" coords="2134,956,2779,1967" href="/browse" alt="browse recipes">
+                <area shape="rect" coords="937,1669,1256,2232" href="/submit" alt="submit a recipe">
+                <area shape="rect" coords="3027,1200,3418,1447" href="/about" alt="about critter cafe">
+            </map>
+            <img id="homepage_img" usemap="#homepage" src="/img/homepage.png" alt="homepage of critter cafe">
+        </div>
 
-        
-        
+        <div id="alt_container">
+            <img id="alt_img" src="/img/homepage_alt.png" usemap="#alt_map">
+            <map name="alt_map" id="alt_map">
+                <area href="/submit" coords="6,2237,539,1643" shape="rect">
+                <area href="/profile" coords="652,1151,1069,2055" shape="rect">
+                <area href="/browse" coords="1316,962,1976,1636" shape="rect">
+                <area href="/about" coords="2220,1207,2599,1447" shape="rect">
+            </map>
+        </div>
         <script src="/js/index.js"></script>
     </body>
 </html>
