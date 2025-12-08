@@ -31,5 +31,5 @@ Thumbs.db
 *.tmp
 *.bak
 
-folder_name/*
-!folder_name/.gitkeep
+uploads/*
+!uploads/.gitkeep
