@@ -70,27 +70,33 @@ const resizeObserver = new ResizeObserver(entries => {
     }
 });
 
-resizeObserver.observe(image);
-resizeObserver.observe(alt_img);
-const orientationMediaQuery = window.matchMedia("(orientation: portrait)");
 
-if(window.matchMedia("(orientation: portrait)").matches){
-    document.getElementById("homepage_container").style.display = "none";
-    document.getElementById("alt_container").style.display = "block";
-} else {
-    document.getElementById("homepage_container").style.display = "block";
-    document.getElementById("alt_container").style.display = "none";
+window.onload = function (){
+
+
+    resizeObserver.observe(image);
+    resizeObserver.observe(alt_img);
+    const orientationMediaQuery = window.matchMedia("(orientation: portrait)");
+
+    if(window.matchMedia("(orientation: portrait)").matches){
+        document.getElementById("homepage_container").style.display = "none";
+        document.getElementById("alt_container").style.display = "block";
+    } else {
+        document.getElementById("homepage_container").style.display = "block";
+        document.getElementById("alt_container").style.display = "none";
+    }
+    
+
+    orientationMediaQuery.addEventListener("change", (e) => {
+    if (e.matches) {
+        console.log("Orientation changed to portrait.");
+        document.getElementById("homepage_container").style.display = "none";
+        document.getElementById("alt_container").style.display = "block";
+    } else {
+        console.log("Orientation changed to landscape.");
+        document.getElementById("homepage_container").style.display = "block";
+        document.getElementById("alt_container").style.display = "none";
+    }
+    });
+
 }
- 
-
-orientationMediaQuery.addEventListener("change", (e) => {
-  if (e.matches) {
-    console.log("Orientation changed to portrait.");
-    document.getElementById("homepage_container").style.display = "none";
-    document.getElementById("alt_container").style.display = "block";
-  } else {
-    console.log("Orientation changed to landscape.");
-    document.getElementById("homepage_container").style.display = "block";
-    document.getElementById("alt_container").style.display = "none";
-  }
-});
