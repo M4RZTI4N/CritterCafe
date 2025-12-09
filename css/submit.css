@@ -128,3 +128,6 @@ input[type="file"] {
 .allergen img{
     max-width: 5vw;
 }
+input[type=checkbox]{
+    opacity: 0;
+}

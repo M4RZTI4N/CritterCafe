@@ -468,7 +468,7 @@ app.get('/recipe/:uri', async (req,res)=>{
     fav_list = await getFavs(req.session.username)
   }
 
-  if (req.session.username == recipe.username){
+  if (req.session.username && req.session.username == recipe.username){
     res.render("edit_recipe",{
       username: recipe.username,
       title: recipe.recipe_name,
