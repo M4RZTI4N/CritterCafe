@@ -14,8 +14,8 @@
 <body>
   <%- include('_header') %>
   
-    <button type="button" style="background-color: red;" id="deleteRecipe">DELETE THIS RECIPIE</button>
- 
+    <button type="button" style="background-color: rgb(253, 88, 88);" id="deleteRecipe">DELETE THIS RECIPE</button>
+  <br>
   
   <form action="/api/edit" method="post" enctype="multipart/form-data">
     <input type="text" name="name" id="name" placeholder="Recipe Name" value="<%= title %>" required>
@@ -39,7 +39,9 @@
       
     </div>
     <textarea type="text" name="ingredients" rows="40" cols="80" id="ingredients" placeholder="Ingredients" required><%= ingredients %></textarea>
+    <br>
     <textarea name="instructions" id="instructions" rows="40" cols="80" placeholder="Instructions" required><%= instructions %></textarea>
+    <br>
     <div id="img_container">
       <% img.forEach(function(i){ %>
         <div class="old_img_holder">
@@ -53,6 +55,7 @@
     <input type="hidden" name="oldURI" id="uri" value="<%= uri %>">
     <label for="images">Add New Images</label>
     <input type="file" name="images" id="images" accept="image/*" multiple>
+    <br>
     <input type="submit" value="SUBMIT">
   </form>
   <script src="/js/edit.js"></script>
