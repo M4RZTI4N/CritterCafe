@@ -46,7 +46,8 @@
       <% img.forEach(function(i){ %>
         <div class="old_img_holder">
             <img src="../<%= i %>" alt="">
-            <button type="button" onclick="document.getElementById('imgRemove').value += '<%= i %>';this.parentElement.remove()">REMOVE IMAGE</button>
+          <br>
+            <button type="button" id = "removeimage" onclick="document.getElementById('imgRemove').value += '<%= i %>';this.parentElement.remove()">REMOVE IMAGE</button>
         </div>
         
       <% }) %>
