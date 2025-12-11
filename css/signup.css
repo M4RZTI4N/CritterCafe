@@ -87,3 +87,17 @@ form input::placeholder {
     text-align: center;
     font-size: 20px;
 }
+
+@media (orientation:portrait) {
+    #signup {
+        width: 85%;
+    }
+
+    #forms {
+        width: 70%;
+    }
+
+    input[type="submit"] {
+        width: 40%;
+    }
+}

@@ -132,3 +132,26 @@ input[type="file"] {
 input[type=checkbox]{
     opacity: 0;
 }
+
+@media (orientation:portrait) {
+    #name {
+        width: 40%;
+    }
+
+    .allergen img {
+        max-width: 10vw;
+        align-items: center;
+    }
+
+    input[type="submit"] {
+        width: 20%;
+    }
+
+    #ingredients {
+        width: 80%;
+    }
+
+    #instructions {
+        width: 90%;
+    }
+}

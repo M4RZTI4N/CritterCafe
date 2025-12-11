@@ -90,3 +90,18 @@ form input::placeholder {
 html {
     background-color:#ffeaea;
 }
+
+
+@media (orientation:portrait) {
+    #login{
+        width: 75%;
+    }
+
+    #Signin{
+        width: 60%;
+    }
+
+    #submit{
+        width: 35%;
+    }
+}

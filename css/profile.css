@@ -175,3 +175,17 @@ hr.rounded{
 h2 {
     font-family: Chewy;
 }
+
+@media (orientation:portrait) {
+    h1 {
+        width: 70%;
+    }
+
+    #extra {
+        width: 75%;
+    }
+
+    h3 {
+        width: 70%;
+    }
+}

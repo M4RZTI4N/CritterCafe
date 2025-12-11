@@ -304,3 +304,66 @@ button#removeimage:hover{
     background: rgb(222, 147, 159);
 
 }
+
+@media (orientation:portrait) {
+    h1 {
+        width: 50%;
+    }
+
+    h2#username {
+        width: 40%;
+    }
+
+    #allergens {
+        width: 80%;
+    }
+
+    h3 {
+        width: 60%;
+    }
+
+    p {
+        width: 70%;
+    }
+
+    input#name{
+        width: 50%;
+    }
+
+    h2 {
+        width: 40%;
+    }
+
+    .allergen img {
+        max-width: 10vw;
+        align-items: center;
+    }
+
+    textarea#ingredients, textarea#instructions {
+        width: 80%;
+    }
+
+    input[type="submit"] {
+        width: 50%;
+    }
+
+    input#images {
+        width: 60%;
+    }
+
+    .old_img_holder {
+        width: 70%;
+    }
+
+    .old_img_holder img {
+        width: 80%;
+    }
+
+    .recipe_img {
+        width: 70%;
+    }
+
+    .recipe_img img {
+        width: 80%;
+    }
+}
